@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#155E75"/>
+      <stop offset="0.55" stop-color="#0E7490"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+    <radialGradient id="glow3" cx="0.7" cy="0.55" r="0.62">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="tooth3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#CFFAFE"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg3)"/>
+  <rect width="1600" height="900" fill="url(#glow3)"/>
+
+  <circle cx="200" cy="180" r="110" fill="#67E8F9" opacity="0.18"/>
+  <circle cx="1380" cy="760" r="170" fill="#0C4A6E" opacity="0.25"/>
+  <circle cx="1200" cy="130" r="80" fill="#FFFFFF" opacity="0.10"/>
+  <circle cx="330" cy="720" r="120" fill="#FFFFFF" opacity="0.08"/>
+
+  <path d="M1180 240l6 28 28 6-28 6-6 28-6-28-28-6 28-6z" fill="#FFFFFF" opacity="0.5"/>
+  <path d="M420 130l6 26 26 6-26 6-6 26-6-26-26-6 26-6z" fill="#FFFFFF" opacity="0.3"/>
+
+  <g transform="translate(1040 300) scale(5)">
+    <path fill-rule="evenodd" fill="url(#tooth3)"
+      d="M32 9C25.5 9 20 13.5 18.5 20C17.5 24 18 27.5 19.3 30.5C20.4 33 21 35.5 21 38.5C21 46 22.8 53 27.2 54.8C29 55.5 31 54.6 31.6 52.4C32 50.9 32 48.5 32 45.5C32 44.8 32.1 44.4 32.5 44.4C32.9 44.4 33 44.8 33 45.5C33 48.5 33 50.9 33.4 52.4C34 54.6 36 55.5 37.8 54.8C42.2 53 44 46 44 38.5C44 35.5 44.6 33 45.7 30.5C47 27.5 47.5 24 46.5 20C45 13.5 38.5 9 32 9Z"/>
+  </g>
+</svg>

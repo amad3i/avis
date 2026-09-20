@@ -1,0 +1,104 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  emoji     String    @default("🌯")
+  icon      String    @default("wrap")
+  sortOrder Int       @default(0)
+  active    Boolean   @default(true)
+  products  Product[]
+}
+
+model Product {
+  id          Int         @id @default(autoincrement())
+  name        String
+  description String      @default("")
+  categoryId  Int
+  category    Category    @relation(fields: [categoryId], references: [id])
+  image       String?
+  gallery     String    @default("")
+  emoji       String      @default("🌯")
+  icon        String      @default("wrap")
+  hit         Boolean     @default(false)
+  isNew       Boolean     @default(false)
+  active      Boolean     @default(true)
+  sortOrder   Int         @default(0)
+  sizes       Size[]
+}
+
+model Size {
+  id        Int     @id @default(autoincrement())
+  productId Int
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  label     String
+  price     Int
+  sortOrder Int     @default(0)
+}
+
+model Slide {
+  id        Int     @id @default(autoincrement())
+  chip      String  @default("")
+  title     String
+  subtitle  String  @default("")
+  ctaText   String  @default("Смотреть меню")
+  ctaLink   String  @default("/menu")
+  cta2Text  String  @default("")
+  cta2Link  String  @default("")
+  image     String?
+  active    Boolean @default(true)
+  sortOrder Int     @default(0)
+}
+
+model Option {
+  id        Int     @id @default(autoincrement())
+  name      String
+  price     Int
+  sortOrder Int     @default(0)
+  active    Boolean @default(true)
+  group     String  @default("addon") // "addon" (добавки) | "sauce" (соусы)
+}
+
+model Order {
+  id           Int         @id @default(autoincrement())
+  customerName String
+  phone        String
+  comment      String      @default("")
+  pickupAt     String      @default("")
+  total        Int
+  status       String      @default("new")
+  canceledBy   String?     // "user" | "kitchen" — кто отменил заказ
+  prevStatus   String?     // статус, из которого заказ был отменён поваром (для возврата "туда же")
+  cancelToken  String?     @unique
+  ip           String      @default("")
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  items        OrderItem[]
+}
+
+model OrderItem {
+  id        Int     @id @default(autoincrement())
+  orderId   Int
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId Int
+  name      String
+  sizeLabel String
+  price     Int
+  quantity  Int
+  options   String  @default("")
+}
+
+model Setting {
+  key   String @id
+  value String
+}
+
+

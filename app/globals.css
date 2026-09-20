@@ -1,0 +1,261 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Шкала типографики: h1 48 / h2 32 / h3 24 / body 16 / small 14 */
+  --fs-h1: clamp(2.25rem, 4.2vw, 3rem);
+  --fs-h2: clamp(1.625rem, 2.6vw, 2rem);
+  --fs-h3: 1.5rem;
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+
+  /* Неоморфизм: мягкие тени поверх светлого холста */
+  --neu-dark: rgba(156, 174, 191, 0.5);
+  --neu-dark-soft: rgba(156, 174, 191, 0.35);
+  --neu-light: rgba(255, 255, 255, 0.92);
+}
+
+*:focus {
+  outline: none;
+}
+*:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-primary) 45%, transparent);
+  border-radius: 14px;
+}
+
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  body {
+    font-size: var(--fs-body);
+    line-height: 1.6;
+    background-color: var(--c-bg, #E9EFF5);
+  }
+
+  html,
+  body {
+    overscroll-behavior-x: none;
+    overflow-x: clip;
+  }
+  h1, h2, h3 {
+    line-height: 1.15;
+    letter-spacing: -0.022em;
+  }
+  h3, .h3 { font-size: var(--fs-h3); font-weight: 800; }
+  small, .text-small { font-size: var(--fs-small); }
+}
+
+h1, .h1 { font-size: var(--fs-h1); font-weight: 800; }
+h2, .h2 { font-size: var(--fs-h2); font-weight: 800; }
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background: transparent;
+  border: none;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+* {
+  scrollbar-width: none;
+  scrollbar-color: transparent transparent;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scrollbar-color: transparent transparent;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+  scroll-padding-top: 80px;
+  overscroll-behavior: none;
+  scroll-behavior: auto;
+  background-color: var(--c-bg, #E9EFF5);
+}
+
+/* Якоря меню/отзывов/локаций: без доп. отступа, встают сразу под
+   шапкой (только базовый scroll-padding-top: 80px на html) */
+#menu,
+#reviews,
+#contacts {
+  scroll-margin-top: 0;
+}
+
+/* Без этого платформенный скролл удваивается/залипает на тачпаде:
+   любой глобальный `scroll-behavior: smooth` заставляет каждое колесо
+   анимироваться и накапливаться. Принудительно отключаем любой кастомный скролл. */
+*,
+*::before,
+*::after {
+  scroll-behavior: auto !important;
+  scroll-snap-type: none !important;
+  scroll-snap-align: none !important;
+}
+
+html,
+body {
+  scroll-behavior: auto !important;
+  scroll-snap-type: none !important;
+}
+
+body {
+  overscroll-behavior: none;
+}
+
+/* Документ блокируется от прокрутки только на витрине (класс вешает
+   ConsumerShell). Тогда <main> — единственный скроллер, нет «двойного»
+   скролла/инерции на тачпаде и телефоне. Админ/кухня класс не получают. */
+html.scroll-locked,
+html.scroll-locked body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: auto;
+}
+
+/* Прячем мобильный нижний бар, пока открыта модалка быстрого добавления */
+body.nobar [data-bottom-bar] {
+  display: none !important;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--c-primary);
+  color: #fff;
+}
+
+/* ===== Неоморфизм: мягкие подъёмы и вдавленности ===== */
+.neu {
+  box-shadow: 9px 9px 22px var(--neu-dark), -9px -9px 22px var(--neu-light);
+}
+.neu-sm {
+  box-shadow: 5px 5px 14px var(--neu-dark), -5px -5px 14px var(--neu-light);
+}
+.neu-xs {
+  box-shadow: 3px 3px 8px var(--neu-dark-soft), -3px -3px 8px var(--neu-light);
+}
+.neu-inset {
+  box-shadow: inset 5px 5px 10px var(--neu-dark-soft), inset -5px -5px 10px var(--neu-light);
+}
+.neu-inset-sm {
+  box-shadow: inset 3px 3px 6px var(--neu-dark-soft), inset -3px -3px 6px var(--neu-light);
+}
+.neu-big {
+  box-shadow: 14px 14px 34px var(--neu-dark), -14px -14px 34px var(--neu-light);
+}
+.neu-col {
+  background: var(--c-bg, #E9EFF5);
+}
+/* Кнопки-«таблетки»: прижатие даёт эффект вдавленности */
+.neu-btn {
+  box-shadow: 5px 5px 12px var(--neu-dark), -5px -5px 12px var(--neu-light);
+  transition: box-shadow 0.18s ease, transform 0.18s ease, filter 0.18s ease;
+}
+.neu-btn:active {
+  box-shadow: inset 4px 4px 9px var(--neu-dark-soft), inset -4px -4px 9px var(--neu-light);
+  transform: scale(0.985);
+}
+/* Поле ввода: мягкое углубление */
+.neu-field {
+  background: var(--c-bg, #E9EFF5);
+  box-shadow: inset 4px 4px 9px var(--neu-dark-soft), inset -4px -4px 9px var(--neu-light);
+  transition: box-shadow 0.2s ease;
+}
+.neu-field:focus {
+  box-shadow: inset 4px 4px 9px var(--neu-dark-soft), inset -4px -4px 9px var(--neu-light),
+    0 0 0 3px color-mix(in srgb, var(--c-primary) 35%, transparent);
+}
+/* Карточка: единый холст, без границ */
+.neu-card {
+  background: var(--c-bg, #E9EFF5);
+  box-shadow: 7px 7px 18px var(--neu-dark), -7px -7px 18px var(--neu-light);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.neu-card:hover {
+  box-shadow: 11px 11px 26px var(--neu-dark), -11px -11px 26px var(--neu-light);
+}
+.neu-card:active {
+  box-shadow: inset 5px 5px 10px var(--neu-dark-soft), inset -5px -5px 10px var(--neu-light);
+}
+/* Лёгкий градиент на холсте, чтобы неоморфизм «дышал» */
+.store-bg {
+  background-color: var(--c-bg, #E9EFF5);
+  background-image: radial-gradient(1200px 600px at 8% -12%, rgba(255,255,255,0.65), transparent 60%),
+    radial-gradient(1000px 500px at 100% 0%, rgba(180, 230, 225, 0.35), transparent 60%);
+}
+.store-main {
+  background: transparent;
+}
+
+.neu-pill {
+  background: var(--c-bg, #E9EFF5);
+  box-shadow: 6px 6px 16px var(--neu-dark), -6px -6px 16px var(--neu-light);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes cartPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+@keyframes shimmer {
+  from { background-position: -400px 0; }
+  to { background-position: 400px 0; }
+}
+@keyframes fadeOutRight {
+  to { opacity: 0; transform: translateX(24px) scale(.97); }
+}
+@keyframes scrollHint {
+  0%, 100% { transform: translateY(0); opacity: .8; }
+  50% { transform: translateY(6px); opacity: .35; }
+}
+
+@keyframes softPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.anim-card-in { animation: cardIn 0.4s ease-out both; }
+
+.anim-fade-up { animation: fadeUp .55s cubic-bezier(.2,.7,.2,1) both; }
+.fade-in { animation: fadeIn .2s ease-out both; }
+.anim-cart-pop { animation: cartPop .4s cubic-bezier(.2,.7,.2,1); }
+.anim-fade-out-right { animation: fadeOutRight .45s ease-in forwards; }
+.anim-scroll-hint { animation: scrollHint 2s ease-in-out infinite; }
+
+.skeleton {
+  background: linear-gradient(90deg, #d8e0e8 25%, #edf2f7 50%, #d8e0e8 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s linear infinite;
+}

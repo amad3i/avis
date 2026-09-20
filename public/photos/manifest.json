@@ -1,0 +1,36 @@
+[
+  {
+    "org_id": "159727312795",
+    "name": "Авис",
+    "slug": "avis",
+    "source_url": "https://yandex.com/maps/org/avis/159727312795/",
+    "og_image": "https://avatars.mds.yandex.net/get-altay/7723428/2a000001842e2ed153484dd1a11af36ed930/L_height",
+    "files_count": 4,
+    "files": [
+      {
+        "n": 1,
+        "url": "https://avatars.mds.yandex.net/get-altay/7723428/2a000001842e2ed153484dd1a11af36ed930/L_height",
+        "file": "/home/n0ll/Projects/SalesUI/data/demo/sites/demo-mu9gv6lt/public/photos/avis/01.jpg",
+        "size": 45280
+      },
+      {
+        "n": 2,
+        "url": "https://avatars.mds.yandex.net/get-altay/5104371/2a00000181333ae30c0ea3f6896545a7f687/S",
+        "file": "/home/n0ll/Projects/SalesUI/data/demo/sites/demo-mu9gv6lt/public/photos/avis/02.jpg",
+        "size": 4156
+      },
+      {
+        "n": 3,
+        "url": "https://avatars.mds.yandex.net/get-altay/7723428/2a000001842e2ed153484dd1a11af36ed930/XXL_height",
+        "file": "/home/n0ll/Projects/SalesUI/data/demo/sites/demo-mu9gv6lt/public/photos/avis/03.jpg",
+        "size": 164614
+      },
+      {
+        "n": 4,
+        "url": "https://avatars.mds.yandex.net/get-altay/11748256/2a00000190ccf09bbc511aa7d55d090290b1/XXL_height",
+        "file": "/home/n0ll/Projects/SalesUI/data/demo/sites/demo-mu9gv6lt/public/photos/avis/04.jpg",
+        "size": 192303
+      }
+    ]
+  }
+]
